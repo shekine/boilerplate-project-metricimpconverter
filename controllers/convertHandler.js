@@ -2,17 +2,20 @@ function ConvertHandler() {
   
   this.getNum = function(input) {
     let result;
-    let splitArr = input.split(/\w/);
-    result = splitArr[0];
-    console.log(result);
-    return result;
+    // let splitArr = input.split(/\D/);
+    result = input.match(/\d+(\.\d+)?(\/\d+(\.\d+)?)?/);
+    if(!result) {
+      return 1;
+    } else {
+      return eval(result[0]);
+    }
   };
   
   this.getUnit = function(input) {
     let result;
-    let splitArr = input.split(/\w/);
-    result = splitArr[1];
-    return result;
+    // let splitArr = input.split(/^\d/);
+    result = input.match(/[a-zA-Z]+/);
+    return result[0];
   };
   
   this.getReturnUnit = function(initUnit) {
@@ -46,22 +49,22 @@ function ConvertHandler() {
     let result;
     switch(unit) {
       case 'gal':
-        result = gallon;
+        result = 'gallon';
         break;
       case 'L':
-        result = Liter;
+        result = 'Liter';
         break;
       case 'lbs':
-        result = pounds;
+        result = 'pounds';
         break;
       case 'kg':
-        result = kilograms;
+        result = 'kilograms';
         break;
       case 'km':
-        result = kilometers;
+        result = 'kilometers';
         break;
       case 'mi':
-        result = miles;
+        result = 'miles';
         break;
       default: return "This unit is not included in this converter.";
     }
@@ -86,10 +89,10 @@ function ConvertHandler() {
       case 'kg':
         result = initNum / lbsToKg;
         break;
-      case 'km':
+      case 'mi':
         result = initNum * miToKm;
         break;
-      case 'mi':
+      case 'km':
         result = initNum / miToKm;
         break;
       default: return "Conversion failed. Check number and units given.";
