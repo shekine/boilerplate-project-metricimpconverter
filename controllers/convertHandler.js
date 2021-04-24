@@ -3,7 +3,7 @@ function ConvertHandler() {
   this.getNum = function(input) {
     let result;
     // let splitArr = input.split(/\D/);
-    result = input.match(/\d+(\.\d+)?(\/\d+(\.\d+)?)?/);
+    result = input.match(/^\d+(\.\d+)?(\/\d+(\.\d+)?)?$/);
     if(!result) {
       return 1;
     } else {
@@ -14,6 +14,7 @@ function ConvertHandler() {
   this.getUnit = function(input) {
     let result;
     // let splitArr = input.split(/^\d/);
+    // result = input.match(/[a-zA-Z]+/);
     result = input.match(/[a-zA-Z]+/);
     return result[0];
   };

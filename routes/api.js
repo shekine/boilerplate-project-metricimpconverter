@@ -30,16 +30,21 @@ module.exports = function (app) {
         console.log(returnNum);
         console.log(string);
       } else {
-        let numRegex = /\d+(\.\d+)?(\/\d+(\.\d+)?)?/;
-        let unitRegex = /[a-zA-Z]+/;
-        let initNum = input.split(/\D/)[0];
-        let initUnit = input.split(/^\d/)[1];
-        
-        if(input.match(numRegex)[0] == "") {
-          console.log('invalid number');
-        }
-        if(input.match(unitRegex)[0] == "") {
-          console.log('invalid unit');
+        console.log("something didn't work: was it the number, unit, or both?");
+        let numRegex = /^\d+(\.\d+)?(\/\d+(\.\d+)?)?$/;
+        let unitRegex = /^(mi|MI|km|KM|lbs|LBS|kg|KG|gal|GAL|l|L)$/;
+        let initNum = input.match(/.+?(?=[a-zA-Z])/)[0];
+        let initUnit = convertHandler.getUnit(input);
+
+        console.log(initNum);
+        console.log(initUnit);
+
+        if(!numRegex.test(initNum) && !unitRegex.test(initUnit)) {
+          console.log("invalid number and unit");
+        } else if(numRegex.test(initNum) && !unitRegex.test(initUnit)) {
+          console.log("invalid unit");
+        } else if(!numRegex.test(initNum) && unitRegex.test(initUnit)) {
+          console.log("invalid number");
         }
       }
       
