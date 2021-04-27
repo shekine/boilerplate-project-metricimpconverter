@@ -3,7 +3,7 @@ function ConvertHandler() {
   this.getNum = function(input) {
     let result;
     // let splitArr = input.split(/\D/);
-    result = input.match(/^\d+(\.\d+)?(\/\d+(\.\d+)?)?$/);
+    result = input.match(/\d+(\.\d+)?(\/\d+(\.\d+)?)?/);
     if(!result) {
       return 1;
     } else {
