@@ -79,22 +79,22 @@ function ConvertHandler() {
     let result;
     switch(initUnit) {
       case 'gal':
-        result = initNum * galToL;
+        result = Math.round(initNum * galToL * 100000) / 100000;
         break;
       case 'L':
-        result = initNum / galToL;
+        result = Math.round(initNum / galToL * 100000) / 100000;
         break;
       case 'lbs':
-        result = initNum * lbsToKg;
+        result = Math.round(initNum * lbsToKg * 100000) / 100000;
         break;
       case 'kg':
-        result = initNum / lbsToKg;
+        result = Math.round(initNum / lbsToKg * 100000) / 100000;
         break;
       case 'mi':
-        result = initNum * miToKm;
+        result = Math.round(initNum * miToKm * 100000) / 100000;
         break;
       case 'km':
-        result = initNum / miToKm;
+        result = Math.round(initNum / miToKm * 100000) / 100000;
         break;
       default: return "Conversion failed. Check number and units given.";
     }
