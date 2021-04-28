@@ -2,21 +2,27 @@ function ConvertHandler() {
   
   this.getNum = function(input) {
     let result;
-    // let splitArr = input.split(/\D/);
-    result = input.match(/\d+(\.\d+)?(\/\d+(\.\d+)?)?/);
+    result = input.match(/\d+(\.\d+)?(\/\d+(\.\d+)?)*/);
+    let doubleFracReg = /(\/\d+(\.\d+)?){2,}/;
     if(!result) {
       return 1;
+    } else if(doubleFracReg.test(result[0])) {
+      return "invalid number";
     } else {
       return eval(result[0]);
     }
   };
   
   this.getUnit = function(input) {
-    let result;
-    // let splitArr = input.split(/^\d/);
-    // result = input.match(/[a-zA-Z]+/);
-    result = input.match(/[a-zA-Z]+/);
-    return result[0];
+    let splitUnits = input.match(/[a-zA-Z]+/);
+    let result = splitUnits[0].match(/^(mi|MI|km|KM|lbs|LBS|kg|KG|gal|GAL|l|L)$/);
+    if(!result) {
+      return 'invalid unit';
+    } else if(result[0] == 'L' || result[0] == 'l') {
+      return result[0].toUpperCase();
+    } else {
+      return result[0].toLowerCase();
+    }
   };
   
   this.getReturnUnit = function(initUnit) {
