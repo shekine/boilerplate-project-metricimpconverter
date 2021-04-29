@@ -56,10 +56,10 @@ function ConvertHandler() {
     let result;
     switch(unit) {
       case 'gal':
-        result = 'gallon';
+        result = 'gallons';
         break;
       case 'L':
-        result = 'Liter';
+        result = 'Liters';
         break;
       case 'lbs':
         result = 'pounds';
