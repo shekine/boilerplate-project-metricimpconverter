@@ -16,9 +16,10 @@ module.exports = function (app) {
       let initNum = convertHandler.getNum(input);
       let initUnit = convertHandler.getUnit(input);
 
-
       if(initNum == "invalid number" && initUnit == "invalid unit") {
         return res.send("invalid number and unit");
+      } else if(initNum == "invalid number" && initUnit == "") {
+        return res.send(initNum);
       } else if(initNum == "invalid number") {
         return res.send(initNum);
       } else if(initUnit == "invalid unit") {
@@ -34,7 +35,6 @@ module.exports = function (app) {
         returnObject.string = string;
         res.send(returnObject);
       }
-      
     });
 
 };

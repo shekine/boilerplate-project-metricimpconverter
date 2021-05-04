@@ -1,20 +1,30 @@
 function ConvertHandler() {
   
   this.getNum = function(input) {
-    let result;
-    result = input.match(/\d+(\.\d+)?(\/\d+(\.\d+)?)*/);
+    /* splitNum separates our units from number. result matches expected inputs including some outliers such as double decimals and double fractions. In the logic section, if no number is inputted, input becomes 1. If our numerical input does not match expected input options (such as obvious non numbers 2//2 2..2) it throws an error. If it contains double fractions or decimals (2.2.2 2/2/2) it throws an error. */
+    let splitNum = input.match(/.*?(?=[a-zA-Z])/);
+    let result = input.match(/\d+(\.\d+)*(\/\d+(\.\d+)*)*/);
+    let doubleDecReg = /(\.\d+){2,}/;
     let doubleFracReg = /(\/\d+(\.\d+)?){2,}/;
+
     if(!result) {
       return 1;
+    } else if(splitNum[0] !== result[0]) {
+      return "invalid number";
+    } else if(doubleDecReg.test(result[0])) {
+      return "invalid number";
     } else if(doubleFracReg.test(result[0])) {
+      console.log("doublefraction");
       return "invalid number";
     } else {
       return eval(result[0]);
     }
+    
   };
   
   this.getUnit = function(input) {
     let splitUnits = input.match(/[a-zA-Z]+/);
+    if(splitUnits == null) {return 'invalid unit';}
     let result = splitUnits[0].match(/^(mi|MI|km|KM|lbs|LBS|kg|KG|gal|GAL|l|L)$/);
     if(!result) {
       return 'invalid unit';
